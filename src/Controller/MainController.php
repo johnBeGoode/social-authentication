@@ -23,17 +23,21 @@ class MainController extends AbstractController
         return $this->render('main/welcome.html.twig', []);
     }
 
+    // Redirige vers Github
     #[Route('/connect/github', name: 'connect_github_start')]
     public function connectWithGithub(ClientRegistry $clientRegistry): RedirectResponse
     {
         return $clientRegistry->getClient('github')->redirect(['user:email'], []);
     }
 
+    // Après Github on est redirigé ici (param "redirect_route" dans fichier knpu_oauth2_client.yaml)
     #[Route('/connect/github/check', name: 'connect_github_check')]
     public function checkWithGithub(Request $request, ClientRegistry $clientRegistry)
     {
-        $client = $clientRegistry->getClient('github');
-        $user = $client->fetchUser();
-        dd($user);
+        // Si on veut authentifier un user, laissez cette méthode vide et créer un Guard Authenticator
+        
+        // $client = $clientRegistry->getClient('github');
+        // $user = $client->fetchUser();
+        // dd($user);
     }
 }
