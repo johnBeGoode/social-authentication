@@ -40,4 +40,18 @@ class MainController extends AbstractController
         // $user = $client->fetchUser();
         // dd($user);
     }
+
+        // Redirige vers Google
+        #[Route('/connect/google', name: 'connect_google_start')]
+        public function connectWithGoogle(ClientRegistry $clientRegistry): RedirectResponse
+        {
+            return $clientRegistry->getClient('google')->redirect([], []);
+        }
+    
+        // Après Google on est redirigé ici (param "redirect_route" dans fichier knpu_oauth2_client.yaml)
+        #[Route('/connect/google/check', name: 'connect_google_check')]
+        public function checkWithGoogle(Request $request, ClientRegistry $clientRegistry)
+        {
+            // Si on veut authentifier un user, laissez cette méthode vide et créer un Guard Authenticator
+        }
 }
