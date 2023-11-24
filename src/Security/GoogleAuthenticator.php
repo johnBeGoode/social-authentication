@@ -38,16 +38,13 @@ class GoogleAuthenticator extends OAuth2Authenticator implements AuthenticationE
     {
         $client = $this->clientRegistry->getClient('google');
         $accessToken = $this->fetchAccessToken($client);
-        // $token = explode(' ', $request->headers->get('authorization'))[1]; //You now look for the bearer token
-        // $accessToken = new AccessToken([
-        //     'access_token' => $token,
-        // ]);
+        // dd($accessToken);
 
         return new SelfValidatingPassport(
             new UserBadge($accessToken->getToken(), function() use ($client, $accessToken) {
-                /** @var User $githubUser */
+                /** @var User $googleUser */
                 $googleUser = $client->fetchUserFromToken($accessToken);
-                $email = $githubUser->getEmail();
+                $email = $googleUser->getEmail();
 
                 // 1. Déjà connecté avec Github ??
                 $existingUser = $this->entityManager->getRepository(User::class)->findOneBy([

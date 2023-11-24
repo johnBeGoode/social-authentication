@@ -34,7 +34,7 @@ class MainController extends AbstractController
     #[Route('/connect/github/check', name: 'connect_github_check')]
     public function checkWithGithub(Request $request, ClientRegistry $clientRegistry)
     {
-        // Si on veut authentifier un user, laissez cette méthode vide et créer un Guard Authenticator
+        // Si on veut authentifier un user, laissez cette méthode vide et créer un custom Authenticator
         
         // $client = $clientRegistry->getClient('github');
         // $user = $client->fetchUser();
@@ -52,6 +52,6 @@ class MainController extends AbstractController
         #[Route('/connect/google/check', name: 'connect_google_check')]
         public function checkWithGoogle(Request $request, ClientRegistry $clientRegistry)
         {
-            // Si on veut authentifier un user, laissez cette méthode vide et créer un Guard Authenticator
+            // Si on veut authentifier un user, laissez cette méthode vide et créer un custom Authenticator
         }
 }

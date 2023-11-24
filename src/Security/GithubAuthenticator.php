@@ -38,10 +38,6 @@ class GithubAuthenticator extends OAuth2Authenticator implements AuthenticationE
     {
         $client = $this->clientRegistry->getClient('github');
         $accessToken = $this->fetchAccessToken($client);
-        // $token = explode(' ', $request->headers->get('authorization'))[1]; //You now look for the bearer token
-        // $accessToken = new AccessToken([
-        //     'access_token' => $token,
-        // ]);
 
         return new SelfValidatingPassport(
             new UserBadge($accessToken->getToken(), function() use ($client, $accessToken) {
